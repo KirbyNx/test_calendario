@@ -3,94 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión</title>
+    <link rel="shortcut icon" href="logo_esit.png" type="image/x-icon">
+    <title>Calendario de Exámenes</title>
     <style>
-        #logo {
+        #examen {
             display: block;
-            margin-left: 125px;
+            margin-left: 40px;
             vertical-align: middle;
             display: flex;
             justify-content: center;
         }
 
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('wallpaper.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-        .fondo-difuminado {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(4px);
-            z-index: -1;
-        }
-        .login-container {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
+            margin: 0;
             padding: 20px;
-            width: 300px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .login-container img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 20px;
-        }
-        .login-container h2 {
-            margin: 0 0 20px;
-        }
-        .login-container input {
-            width: calc(100% - 0px);
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #223E69;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        .login-container button:hover {
-            background-color: #1a2a4b;
-        }
-        #name {
-            text-align: center;
+            background-color: #f9f9f9;
         }
 
-        .espacio-arriba {
-            margin-top: 20px;
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #223E69;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #223E69;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+            }
+
+            #examen {
+                margin-left: 75px;
+            }
+
+            th, td {
+                box-sizing: border-box;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border: 1px solid #ddd;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                background-color: #fff;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            #asi[data-label="Asignatura"] {
+                text-align: center;
+                color: #223E69;
+                font-size: 20px;
+                font-weight: bold;
+                padding-left: 0;
+            }
+
+            #asi[data-label="Asignatura"]::before {
+                content: none;
+            }
+
+            td::before {
+                position: absolute;
+                top: 50%;
+                left: 10px;
+                transform: translateY(-50%);
+                width: 45%;
+                white-space: nowrap;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #223E69;
+                content: attr(data-label);
+                text-align: left;
+            }
+
+            td:last-child {
+                padding-bottom: 20px;
+            }
+        }    
     </style>
 </head>
 <body>
-    <div class="fondo-difuminado"></div> 
-    <div class="login-container">
-        <img src="logo_esit.png" alt="Logo" style="vertical-align: middle;" id="logo">
-        <h2 id="name">Inicio de Sesión</h2>
-        <form action="/login" method="post">
-            <label for="username">Correo electrónico:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-            <div class="espacio-arriba"></div>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-    </div>
+    <a href="https://aula.esit.gob.sv/">
+        <img src="logo_esit.png" alt="Logo de la ESIT" width="50" height="50">
+    </a>
+    <h1>Calendario de Exámenes de la ESIT</h1>
+    <h2>Próximos exámenes a realizar</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Asignatura</th>
+                <th>Nombre</th>
+                <th>Disponible desde</th>
+                <th>Disponible hasta</th>
+                <th>Intentar examen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="asi" data-label="Asignatura">Gestión de Servicios de Tecnología de Información</td>
+                <td data-label="Nombre">Control de lectura 3.2- UD3 GSTI. No evaluado</td>
+                <td data-label="Disponible desde">15 de agosto</td>
+                <td data-label="Disponible hasta">Sin fecha de cierre</td>
+                <td data-label="Intentar examen">
+                    <a href="https://aula.esit.gob.sv/mod/quiz/view.php?id=4721">
+                      <img src="Icono_de_evaluacion.png" alt="Realizar Examen" width="45" height="45" style="vertical-align: middle;" id="examen">
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Bases de Datos</td>
+                <td data-label="Nombre">Examen 1 - UD3</td>
+                <td data-label="Disponible desde">23 de agosto</td>
+                <td data-label="Disponible hasta">25 de agosto</td>
+                <td data-label="Intentar examen">
+                    <a href="https://aula.esit.gob.sv/mod/quiz/view.php?id=4845">
+                      <img src="Icono_de_evaluacion.png" alt="Realizar Examen" width="45" height="45" style="vertical-align: middle;" id="examen">
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Gestión de Servicios de Tecnología de Información</td>
+                <td data-label="Nombre">Examen UD3</td>
+                <td data-label="Disponible desde">29 de agosto</td>
+                <td data-label="Disponible hasta">31 de agosto</td>
+                <td data-label="Intentar examen">
+                    <a href="https://aula.esit.gob.sv/mod/quiz/view.php?id=4534">
+                      <img src="Icono_de_evaluacion.png" alt="Realizar Examen" width="45" height="45" style="vertical-align: middle;" id="examen">
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Estructura de Datos</td>
+                <td data-label="Nombre">Examen 1 - UD4</td>
+                <td data-label="Disponible desde">29 de Agosto</td>
+                <td data-label="Disponible hasta">1 de Septiembre</td>
+                <td data-label="Intentar examen">Aún no disponible</td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Sistemas operativos</td>
+                <td data-label="Nombre">Examen 1 - UD3</td>
+                <td data-label="Disponible desde">30 de Agosto</td>
+                <td data-label="Disponible hasta">1 de Septiembre</td>
+                <td data-label="Intentar examen">Aún no disponible</td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Fundamentos de Programación</td>
+                <td data-label="Nombre">Examen UD4</td>
+                <td data-label="Disponible desde">2 de Septiembre</td>
+                <td data-label="Disponible hasta">9 de Septiembre</td>
+                <td data-label="Intentar examen">Aún no disponible</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Exámenes no disponibles</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Asignatura</th>
+                <th>Nombre</th>
+                <th>Disponible desde</th>
+                <th>Disponible hasta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="asi" data-label="Asignatura">Fundamentos de Programación</td>
+                <td data-label="Nombre">Examen UD3</td>
+                <td data-label="Disponible desde">16 de agosto</td>
+                <td data-label="Disponible hasta">19 de agosto</td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Fundamentos de Redes</td>
+                <td data-label="Nombre">Examen 1 - UD2</td>
+                <td data-label="Disponible desde">16 de agosto</td>
+                <td data-label="Disponible hasta">18 de agosto</td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Sistemas Operativos</td>
+                <td data-label="Nombre">Examen 1 - UD3</td>
+                <td data-label="Disponible desde">16 de agosto</td>
+                <td data-label="Disponible hasta">18 de agosto</td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Bases de Datos</td>
+                <td data-label="Nombre">Examen 1 - UD3</td>
+                <td data-label="Disponible desde">16 de agosto</td>
+                <td data-label="Disponible hasta">18 de agosto</td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Sistemas operativos</td>
+                <td data-label="Nombre">Examen 2 - UD2</td>
+                <td data-label="Disponible desde">9 de Agosto</td>
+                <td data-label="Disponible hasta">11 de Agosto</td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Estructura de Datos</td>
+                <td data-label="Nombre">Examen 1 - UD3</td>
+                <td data-label="Disponible desde">9 de Agosto</td>
+                <td data-label="Disponible hasta">11 de Agosto</td>
+            </tr>
+            <tr>
+                <td id="asi" data-label="Asignatura">Bases de Datos</td>
+                <td data-label="Nombre">Examen 2 - UD2</td>
+                <td data-label="Disponible desde">9 de Agosto</td>
+                <td data-label="Disponible hasta">11 de Agosto</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
 
